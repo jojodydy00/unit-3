@@ -1,5 +1,6 @@
 //Jody Wang 
 //Bl 2-3 Feb 28 2025
+//unit 3-checkpoint 2
 
 //pallette of colors 
 color matcha     = #c3c8a5;
@@ -7,7 +8,7 @@ color white      = #f8f2e2;
 color cream      = #F4EAC5;
 color lightgreen = #9eb484;
 color green      = #445232;
-
+color darkgreen  = #2A3E2D;
 //variabls for color selection
 color selectedColor;
 
@@ -23,24 +24,58 @@ void draw() {
   
   //buttons
   fill(cream);
-  circle(150, 100, 100);
+  square(80, 50, 100);
   
   fill(lightgreen);
-  circle(400, 100, 100);
+  square(270, 50, 100);
   
   fill(green);
-  circle(650, 100, 100);
+  square(480, 50, 100);
+  
+  fill(darkgreen);
+  square(660, 50, 100);
   
   //indicator
   fill(selectedColor);
-  square(200, 170, 400);
+  circle(400, 380, 400);
 } //----------------end of draw----------------------
 
 void mouseReleased() {
   //cream button
-  if (dist(150, 100, mouseX, mouseY) < 50) {
+  if (dist(80, 50, mouseX, mouseY) < 100) {
     selectedColor = cream;
   }
+  
+  //lightgreen button 
+  if(dist(270, 50, mouseX, mouseY) < 100) {
+    selectedColor = lightgreen;
+  } 
+  
+  //green button 
+  if(dist(480, 50, mouseX, mouseY) < 100) {
+    selectedColor = green;
+  }
+  
+  //darkgreen button
+  if(dist(660, 50, mouseX, mouseY) < 100) {
+    selectedColor = darkgreen;
+  } //-------------------------------end of void mouseReleased-------------
+   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   //lightgreen button 
 } // --------------end of mouseReleased---------------
