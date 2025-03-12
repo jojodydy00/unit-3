@@ -16,15 +16,17 @@ color black = #050505;
 color selectedColor;
 
 float sliderX;
+float thickness;
 
 void setup() {
   size(900, 800);
   strokeWeight(4);
   stroke(white);
   background(white);
-  sliderX = 100;
+  sliderX = 25;
+  thickness = 4;
   selectedColor = black;
-} //------------------END OF SETUP------------------
+} //------------------END OF SETUP---------------------------------
 
 void draw() { //contron pannel
   strokeWeight(4);
@@ -59,14 +61,19 @@ void draw() { //contron pannel
   fill(255);
   circle(sliderX, 340, 18);
 
-  //indicator
+  //indicator for color
   noStroke();
   fill(selectedColor);
   rect(25, 400, 145, 20);
 
+  // indicator for thickness
+  stroke(0);
+  strokeWeight(thickness);
+  line(25, 370, 170, 370);
+  
   //line
   fill(selectedColor);
-} //-------------------END OF DRAW------------------
+} //-------------------END OF DRAW--------------------------------
 
 void mouseReleased() {
   //red button
@@ -107,12 +114,21 @@ void controlSlider() {
   if (mouseX > 25 && mouseX < 170 && mouseY > 320 && mouseY < 350 ) {
     sliderX = mouseX;
   }
-}
+
+  if (mouseX > 25 && mouseX < 170 && mouseY > 300 && mouseY < 400 ) {
+    thickness = sliderX;
+    thickness = map(sliderX, 25, 170, 4, 30);
+  }
+
+} //--------------------------end of control slider-----------------------------
 
 void mouseDragged() {
   controlSlider();
 
-  stroke(selectedColor);
-  strokeWeight(4);
-  line(pmouseX, pmouseY, mouseX, mouseY);
+  if (mouseX > 200 && mouseX < 900 && mouseY > 0 && mouseY < 800) {
+    stroke(selectedColor);
+    strokeWeight(thickness);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
+  
 } //-------------------------end of mouseDragged---------------------------
