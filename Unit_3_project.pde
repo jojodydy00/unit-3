@@ -18,6 +18,7 @@ color selectedColor;
 float sliderX;
 float thickness;
 
+PImage toothless;
 void setup() {
   size(900, 800);
   strokeWeight(4);
@@ -73,6 +74,7 @@ void draw() { //contron pannel
   
   //line
   fill(selectedColor);
+
 } //-------------------END OF DRAW--------------------------------
 
 void mouseReleased() {
