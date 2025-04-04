@@ -24,10 +24,11 @@ void setup() {
   strokeWeight(4);
   stroke(white);
   background(white);
+  toothless = loadImage("toothless.png");
   sliderX = 25;
   thickness = 4;
   selectedColor = black;
-} //------------------END OF SETUP---------------------------------
+} //------------------END OF SETUP--------------------------------- 
 
 void draw() { //contron pannel
   strokeWeight(4);
@@ -54,8 +55,15 @@ void draw() { //contron pannel
   //blue
   fill(blue);
   circle(145, 250, 50);
+  
+ //stamp
+ stroke(50, 98, 155);
+ strokeWeight(6);
+  rect(18, 442, 160, 134);
+image(toothless, 1, 442, 200, 120);
 
   //slider
+  stroke(0);
   strokeWeight(10);
   line(25, 340, 170, 340);
   strokeWeight(4);
