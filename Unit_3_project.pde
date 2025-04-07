@@ -59,7 +59,8 @@ void draw() { //contron pannel
  //stamp
  stroke(50, 98, 155);
  strokeWeight(6);
-  rect(18, 442, 160, 134);
+ fill(lightblue);
+ rect(18, 442, 160, 134);
 image(toothless, 1, 442, 200, 120);
 
   //slider
@@ -142,3 +143,11 @@ void mouseDragged() {
   }
   
 } //-------------------------end of mouseDragged---------------------------
+
+void tactile() {
+   if(mouseX > 18 && mouseX < 178 && mouseY > 442 && mouseY < 576) {
+    fill(blue);
+  } else {
+    fill(lightblue);
+  }
+}
