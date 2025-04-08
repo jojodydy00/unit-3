@@ -19,6 +19,8 @@ float sliderX;
 float thickness;
 
 PImage toothless;
+boolean stampOn = true;
+
 void setup() {
   size(900, 800);
   strokeWeight(4);
@@ -28,7 +30,8 @@ void setup() {
   sliderX = 25;
   thickness = 4;
   selectedColor = black;
-} //------------------END OF SETUP--------------------------------- 
+  stampOn = false;
+} //------------------END OF SETUP---------------------------------
 
 void draw() { //contron pannel
   strokeWeight(4);
@@ -55,13 +58,18 @@ void draw() { //contron pannel
   //blue
   fill(blue);
   circle(145, 250, 50);
-  
- //stamp
- stroke(50, 98, 155);
- strokeWeight(6);
- fill(lightblue);
- rect(18, 442, 160, 134);
-image(toothless, 1, 442, 200, 120);
+
+  //stamp
+  stampOnOff();
+  if (stampOn) {
+    fill(blue); //active = blue
+  } else {
+    fill(lightblue);
+  }
+
+  rect(18, 442, 160, 134);
+  imageMode(CENTER);
+  image(toothless, 100, 500, 200, 120);
 
   //slider
   stroke(0);
@@ -80,10 +88,9 @@ image(toothless, 1, 442, 200, 120);
   stroke(0);
   strokeWeight(thickness);
   line(25, 370, 170, 370);
-  
+
   //line
   fill(selectedColor);
-
 } //-------------------END OF DRAW--------------------------------
 
 void mouseReleased() {
@@ -117,9 +124,25 @@ void mouseReleased() {
     selectedColor = blue;
   }
 
-  //slider
-  controlSlider();
-} //------------------------end of mouseReleased-----------------------------
+  //stamp
+  if (mouseX > 18 && mouseX < 178 && mouseY > 442 && mouseY < 576) {
+    stampOn = !stampOn;
+  }
+  if (mouseX > 260) {
+    if (stampOn == true) {
+      image(toothless, mouseX, mouseY, 300, 200);
+    } else {
+      //squiggly line
+      if (mouseX > 400 && mouseX < 900 && mouseY > 0 && mouseY < 800) {
+        stroke(selectedColor);
+        strokeWeight(thickness);
+        line(pmouseX, pmouseY, mouseX, mouseY);
+      }
+    }
+  }
+    //slider
+    controlSlider();
+}//------------------------end of mouseReleased-----------------------------
 
 void controlSlider() {
   if (mouseX > 25 && mouseX < 170 && mouseY > 320 && mouseY < 350 ) {
@@ -130,24 +153,31 @@ void controlSlider() {
     thickness = sliderX;
     thickness = map(sliderX, 25, 170, 4, 30);
   }
-
 } //--------------------------end of control slider-----------------------------
 
 void mouseDragged() {
   controlSlider();
-
-  if (mouseX > 200 && mouseX < 900 && mouseY > 0 && mouseY < 800) {
-    stroke(selectedColor);
-    strokeWeight(thickness);
-    line(pmouseX, pmouseY, mouseX, mouseY);
+  if (mouseX > 260) {
+    if (stampOn == true) {
+      //stamp drawing
+      image(toothless, mouseX, mouseY, 300, 200);
+    } else {
+      //squiggly line
+      if (mouseX > 200 && mouseX < 900 && mouseY > 0 && mouseY < 800) {
+        stroke(selectedColor);
+        strokeWeight(thickness);
+        line(pmouseX, pmouseY, mouseX, mouseY);
+      }
+    }
   }
-  
 } //-------------------------end of mouseDragged---------------------------
 
-void tactile() {
-   if(mouseX > 18 && mouseX < 178 && mouseY > 442 && mouseY < 576) {
-    fill(blue);
+void stampOnOff() {
+  if (stampOn == true) {
+    stroke(50, 98, 155);
+    strokeWeight(6);
   } else {
-    fill(lightblue);
+    stroke(139, 176, 193);
+    strokeWeight(4);
   }
-}
+} //------------------end of stampOnoff---------------------------------------
