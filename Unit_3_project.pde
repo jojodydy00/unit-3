@@ -91,6 +91,28 @@ void draw() { //contron pannel
 
   //line
   fill(selectedColor);
+
+  //new button
+  strokeWeight(5);
+  fill(247, 165, 165);
+  rect(18, 600, 160, 40);
+  PFont newFont;
+  newFont = loadFont("EngraversMT-40.vlw");
+  textFont(newFont);
+  fill(255);
+  text("New", 34, 633);
+  
+  //load button
+  fill(199, 165, 247);
+  rect(18, 670, 160, 40);
+
+  //save button
+  fill(175, 175, 175);
+  rect(18, 740, 160, 40);
+
+  stroke(0);
+  fill(selectedColor);
+  strokeWeight(thickness);
 } //-------------------END OF DRAW--------------------------------
 
 void mouseReleased() {
@@ -128,7 +150,7 @@ void mouseReleased() {
   if (mouseX > 18 && mouseX < 178 && mouseY > 442 && mouseY < 576) {
     stampOn = !stampOn;
   }
-  if (mouseX > 260) {
+  if (mouseX > 240) {
     if (stampOn == true) {
       image(toothless, mouseX, mouseY, 300, 200);
     } else {
@@ -140,8 +162,14 @@ void mouseReleased() {
       }
     }
   }
-    //slider
-    controlSlider();
+  //slider
+  controlSlider();
+
+  //new button
+  if (mouseX > 18 && mouseX < 178 && mouseY > 600 && mouseY < 640) {
+    background(white);
+    
+  }
 }//------------------------end of mouseReleased-----------------------------
 
 void controlSlider() {
@@ -157,6 +185,12 @@ void controlSlider() {
 
 void mouseDragged() {
   controlSlider();
+  //squiggly line
+   if (mouseX > 200 && mouseX < 900 && mouseY > 0 && mouseY < 800) {
+        stroke(selectedColor);
+        strokeWeight(thickness);
+        line(pmouseX, pmouseY, mouseX, mouseY);
+      }
   if (mouseX > 260) {
     if (stampOn == true) {
       //stamp drawing
