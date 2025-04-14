@@ -101,14 +101,24 @@ void draw() { //contron pannel
   textFont(newFont);
   fill(255);
   text("New", 34, 633);
-  
+
   //load button
   fill(199, 165, 247);
   rect(18, 670, 160, 40);
+  PFont loadFont;
+  loadFont = loadFont("EngraversMT-40.vlw");
+  textFont(loadFont);
+  fill(255);
+  text("load", 30, 704);
 
   //save button
   fill(175, 175, 175);
   rect(18, 740, 160, 40);
+  PFont saveFont;
+  saveFont = loadFont("EngraversMT-40.vlw");
+  textFont(saveFont);
+  fill(255);
+  text("save", 30, 774);
 
   stroke(0);
   fill(selectedColor);
@@ -167,10 +177,38 @@ void mouseReleased() {
 
   //new button
   if (mouseX > 18 && mouseX < 178 && mouseY > 600 && mouseY < 640) {
-    background(white);
-    
+    fill(white);
+    stroke(white);
+    rect(200, 0, 700, 800);
+  }
+  //load button
+  if (mouseX > 18 && mouseX < 178 && mouseY > 670 && mouseY < 710) {
+    selectInput("Pick an image to load", "openImage");
+  }
+  //save button
+  if (mouseX > 18 && mouseX < 178 && mouseY > 740 && mouseY < 780) {
+    selectOutput("Choose a name for your new image file", "saveImage");
   }
 }//------------------------end of mouseReleased-----------------------------
+
+void saveImage(File f) {
+  if (f != null) {
+    PImage canvas = get( 71, 1, 71, 1);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+void openImage(File f) {
+  if (f != null) {
+    //KLUDGE
+    int n = 0;
+    while (n < 10) {
+      PImage pic = loadImage(f.getPath());
+      image(pic, 0, 0);
+      n = n + 1;
+    }
+  }
+}
 
 void controlSlider() {
   if (mouseX > 25 && mouseX < 170 && mouseY > 320 && mouseY < 350 ) {
@@ -186,11 +224,11 @@ void controlSlider() {
 void mouseDragged() {
   controlSlider();
   //squiggly line
-   if (mouseX > 200 && mouseX < 900 && mouseY > 0 && mouseY < 800) {
-        stroke(selectedColor);
-        strokeWeight(thickness);
-        line(pmouseX, pmouseY, mouseX, mouseY);
-      }
+  if (mouseX > 200 && mouseX < 900 && mouseY > 0 && mouseY < 800) {
+    stroke(selectedColor);
+    strokeWeight(thickness);
+    line(pmouseX, pmouseY, mouseX, mouseY);
+  }
   if (mouseX > 260) {
     if (stampOn == true) {
       //stamp drawing
